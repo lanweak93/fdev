@@ -1,0 +1,51 @@
+image: 10.191.60.105/mbpe-public-docker-local/library/fdev-helper:latest
+
+stages:
+  - node-build
+  - maven-build
+  - deploy
+
+variables:
+  CI_REGISTRY: "10.191.60.105/mbpe-public-docker-local"
+  CI_REGISTRY_IMAGE: "10.191.60.105/mbpe-public-docker-local/library/testmanage-ui"
+  CI_REGISTRY_USER: "spdb-mbpe"
+  CI_REGISTRY_PASSWORD: "spdb@1234" 
+
+
+
+node-build:
+  image: 10.191.60.105/mbpe-public-docker-local/library/node-helper:latest
+  stage: node-build
+  script:
+    - npm config set registry http://10.191.70.51/artifactory/api/npm/mbpe-npm-virtual/
+    - npm install
+    - npm run build
+  before_script:
+    - load_cache.sh
+  after_script:
+    - make_cache.sh
+  artifacts:
+    paths:
+      - dist/
+    expire_in: 30 min
+  only:
+    - /^SIT.*$/
+    - /^sit.*$/
+    - schedules
+    - /^PRO.*$/
+    - /^pro.*$/
+
+k8s-deploy:
+  services:
+    - 10.191.60.105/mbpe-public-docker-local/library/docker:dind-spdb
+  stage: deploy
+  script:
+    - cp -r dist gitlab-ci/
+    - build_fdev.py
+    - deploy_fdev.py
+  only:
+    - /^SIT.*$/
+    - /^sit.*$/
+    - schedules
+    - /^PRO.*$/
+    - /^pro.*$/

@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: fblue
+  cloud:
+    config:
+      #快速失败响应
+      fail-fast: true
+      label: master
+      uri: http://10.134.13.25:9092/fdev-configserver
+      name: fblue
+      profile: ${SPRING_PROFILE_ACTIVE}
+    bus:
+      refresh:
+        enabled: true

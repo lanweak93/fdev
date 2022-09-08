@@ -1,0 +1,40 @@
+image: 10.141.59.35/library/fdev-helper:latest
+
+stages:
+  - maven-build
+  - deploy
+
+variables:
+  CI_REGISTRY: "10.141.59.35"
+  CI_REGISTRY_IMAGE: "10.141.59.35/library/fdev-entity"
+  CI_REGISTRY_USER: "dockerimg"
+  CI_REGISTRY_PASSWORD: "Spdb@1234"
+
+maven-build:
+  image: 10.141.59.35/library/maven:3-jdk-8
+  stage: maven-build
+  script:
+    
+    - mvn -U clean package -Dmaven.test.skip=true
+  artifacts:
+    paths:
+      - target/*.jar
+    expire_in: 30 min
+  only:
+    - /^SIT.*$/
+    - /^sit.*$/
+    - /^PRO.*$/
+    - /^pro.*$/
+
+k8s-deploy:
+  stage: deploy
+  services:
+    - 10.141.59.35/library/docker:dind-spdb
+  script:
+    - build_fdev.py
+    - deploy_fdev.py
+  only:
+    - /^SIT.*$/
+    - /^sit.*$/
+    - /^PRO.*$/
+    - /^pro.*$/

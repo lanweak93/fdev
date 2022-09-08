@@ -1,0 +1,53 @@
+spring:
+  application:
+    name: fnotify
+  cloud:
+    config:
+    #快速失败响应
+      fail-fast: true
+      label: master
+      uri: http://10.134.13.25:9092/fdev-configserver
+      name: fnotify
+      profile: ${SPRING_PROFILE_ACTIVE}
+    bus:
+      refresh:
+        enabled: true
+
+toalarmemail:
+  fdevAppDownAlert:
+    - csii_huangfurh@spdbdev.com
+    - T-luot1@spdbdev.com
+    - csii_zhangcc@spdbdev.com
+    - luol10@spdb.com.cn
+  fdevTaskAlert:
+    - csii_zhoum@spdbdev.com
+    - wuj49@spdb.com.cn
+    - yangpl1@spdb.com.cn
+    - T-luot1@spdbdev.com
+    - csii_zhangcc@spdbdev.com
+  fdevReleaseAlert:
+    - T-lizy@spdbdev.com
+    - yangpl1@spdb.com.cn
+    - T-luot1@spdbdev.com
+    - csii_zhangcc@spdbdev.com
+  fdevInterfaceAlert:
+    - baizx@spdb.com.cn
+    - csii_hexy@spdbdev.com
+    - T-luot1@spdbdev.com
+    - csii_zhangcc@spdbdev.com
+  fdevEnvConfigAlert:
+    - csii_hexy@spdbdev.com
+    - T-luot1@spdbdev.com
+    - csii_zhangcc@spdbdev.com
+  others:
+    - wuxr@spdb.com.cn
+    - T-luot1@spdbdev.com
+    - wuj49@spdb.com.cn
+    - yangpl1@spdb.com.cn
+    - gaod3@spdb.com.cn
+    - csii_zhangcc@spdbdev.com
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: bus-refresh

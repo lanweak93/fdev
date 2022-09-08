@@ -1,0 +1,59 @@
+spring:
+  application:
+    name: tcase
+  cloud:
+    config:
+    #快速失败响应
+      fail-fast: true
+      label: master
+      uri: http://10.134.13.25:9092/fdev-configserver
+      name: tcase
+      profile: ${SPRING_PROFILE_ACTIVE}
+    bus:
+      refresh:
+        enabled: true
+
+toalarmemail:
+  fdevAppDownAlert:
+    - csii_huangfurh@spdbdev.com
+    - csii_shenzy@spdbdev.com
+    - T-luot1@spdbdev.com
+    - csii_zhangcc@spdbdev.com
+  fdevTaskAlert:
+    - csii_zhoum@spdbdev.com
+    - csii_wuj@spdbdev.com
+    - csii_shenzy@spdbdev.com
+    - T-luot1@spdbdev.com
+    - csii_zhangcc@spdbdev.com
+  fdevReleaseAlert:
+    - T-lizy@spdbdev.com
+    - csii_mengjy@spdbdev.com
+    - csii_wangj@spdbdev.com
+    - csii_shenzy@spdbdev.com
+    - T-luot1@spdbdev.com
+    - csii_zhangcc@spdbdev.com
+  fdevInterfaceAlert:
+    - baizx@spdb.com.cn
+    - csii_hexy@spdbdev.com
+    - csii_shenzy@spdbdev.com
+    - T-luot1@spdbdev.com
+    - csii_zhangcc@spdbdev.com
+  fdevEnvConfigAlert:
+    - csii_hek@spdbdev.com
+    - csii_yangf@spdbdev.com
+    - csii_shenzy@spdbdev.com
+    - T-luot1@spdbdev.com
+    - csii_zhangcc@spdbdev.com
+  others:
+    - wuxr@spdb.com.cn
+    - csii_shenzy@spdbdev.com
+    - T-luot1@spdbdev.com
+    - csii_wuj@spdbdev.com
+    - csii_wangj@spdbdev.com
+    - gaod@spdbdev.com
+    - csii_zhangcc@spdbdev.com
+management:
+  endpoints:
+    web:
+      exposure:
+        include: bus-refresh
