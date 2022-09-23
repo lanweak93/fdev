@@ -175,6 +175,14 @@ fdev 遵守 [Apache-2.0 licensed](./LICENSE) 协议。
 4. fdev项目分为多个微服务项目，每个微服务需要单独部署启动，微服务的项目配置文件管理在fdev-config模块下，fdev-config-server是微服务配置中心服务端，修改其应用
    配置文件读取方式从fdev-config中加载，每个微服务可以在bootstrap.properties中配置fdev-config-server的外部配置请求地址。
    
+   fdev涉及的集成环境如下：
+   1、数据库：mongodb、mysql、redis
+   2、容器部署：k8s、rancher、docker
+   3、存储对象：minio、nas
+   4、反向代理：nginx
+   5、消息队列：kafka
+   
+   
 
 ## 🔗 联系我们
 
